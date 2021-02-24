@@ -20,18 +20,27 @@ export default function ConverterForm() {
     } else {
       setState((prev) => ({
         ...prev,
-        hex: e.target.value,
+        hex: "e.target.value",
         rgb: "Ошибка",
       }));
     }
 
     if (e.target.value.match(regexp)) {
       const rgb = hexToRgb(e.target.value);
-      setState({
-        hex: e.target.value,
-        rgb: `rgb(${rgb.r},${rgb.g},${rgb.b})`,
-        backgroundColor: e.target.value,
-      });
+
+      if (rgb) {
+        setState({
+          hex: e.target.value,
+          rgb: `rgb(${rgb.r},${rgb.g},${rgb.b})`,
+          backgroundColor: e.target.value,
+        });
+      } else {
+        setState((prev) => ({
+          ...prev,
+          hex: e.target.value,
+          rgb: "Ошибка",
+        }));
+      }
     } else {
       setState((prev) => ({
         ...prev,
